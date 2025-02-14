@@ -19,13 +19,13 @@ export default class Blog extends BaseModel {
   declare status: 'pubic' | 'private'
 
   @column()
+  declare title: string
+  
+  @column()
   declare content: string
 
   @column()
-  declare title: string
-
-  @column()
-  declare readtime: number 
+  declare readTime: number 
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -35,6 +35,9 @@ export default class Blog extends BaseModel {
 
   @column()
   declare imageUrl: string
+
+  @column()
+  declare likeCount: number
 
   @belongsTo(() => User,{
     foreignKey: 'user_id',
