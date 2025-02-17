@@ -13,12 +13,10 @@ export default class Like extends BaseModel {
   @column()
   declare user_id: number
 
-  @column()
-  declare like_count: number
 
   @belongsTo(() => Blog,{
     foreignKey: 'blog_id',
-    localKey: 'blog_id',
+    localKey: 'id',
   })
   declare blog: BelongsTo<typeof Blog>
 

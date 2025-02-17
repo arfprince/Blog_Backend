@@ -9,6 +9,9 @@ export default class BlogService{
     public async getBlogByUserId(user_id: number){
         return await this.blogQuery.getBlogByUserId(user_id);
     }
+    public async getBlogByBlogId(blog_id: number){
+        return await this.blogQuery.getBlogByBlogId(blog_id);
+    }
     public async deleteBlog(blog_id: number){
         return await this.blogQuery.deleteBlog(blog_id);
     }
@@ -23,5 +26,14 @@ export default class BlogService{
     }
     public async updateBlog(blog_id: number, title: string, content: string, imageUrl: string){
         return await this.blogQuery.updateBlog(blog_id, title, content, imageUrl);
+    }
+    public async getFavourites(payload: {user_id: number}){
+        return await this.blogQuery.getFavourites(payload);
+    }
+    public async getLikes(payload: {user_id: number}){
+        return await this.blogQuery.getLikes(payload);
+    }
+    public async updateLike(payload:{blog_id: number, like_count: number}){
+        return await this.blogQuery.updateLike(payload);
     }
 }

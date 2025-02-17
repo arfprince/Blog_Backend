@@ -1,23 +1,21 @@
 import vine from "@vinejs/vine";
 
-
-export const addToFavouriteValidate = vine.compile(
+export const AddToLikeValidation = vine.compile(
     vine.object({
         blog_id: vine.number(),
         user_id: vine.number(),
     })
 )
 
-
-export const removeFromFavouriteValidate = vine.compile(
+export const RemoveFromLikeValidation = vine.compile(
     vine.object({
         blog_id: vine.number(),
-        user_id: vine.number(),
+        user_id: vine.number()
     })
 )
-export const getFavouritesByUserIdValidate = vine.compile(
+
+export const GetLikesByUserIdValidation = vine.compile(
     vine.object({
         user_id: vine.number(),
     })
 )
-

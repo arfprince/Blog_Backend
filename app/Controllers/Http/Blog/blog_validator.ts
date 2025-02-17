@@ -11,3 +11,22 @@ export const BlogCreateVAlidation = vine.compile(
         imageUrl: vine.string()
     })
 ) 
+
+export const GetFavourites = vine.compile(
+    vine.object({
+        user_id: vine.number()
+    })
+)
+
+export const GetLikes = vine.compile(
+    vine.object({
+        user_id: vine.number()
+    })
+)
+
+export const UpdateLikeValidation = vine.compile(
+    vine.object({
+        blog_id: vine.number(),
+        like_count: vine.number()
+    })
+)

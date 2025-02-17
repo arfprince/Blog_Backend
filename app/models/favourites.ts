@@ -21,7 +21,7 @@ export default class Favourite extends BaseModel {
 
   @belongsTo(() => Blog,{
     foreignKey: 'blog_id',
-    localKey: 'blog_id',
+    localKey: 'id',
   })
   declare blog: BelongsTo<typeof Blog>
 

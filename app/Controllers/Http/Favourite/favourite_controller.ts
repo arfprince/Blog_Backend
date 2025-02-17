@@ -9,11 +9,10 @@ export default class FavouriteController{
     public async getFavouritesByUserId({request, response}: { request: any, response: any }){
         try{
             const payload = await request.validateUsing(getFavouritesByUserIdValidate);
-            console.log(payload);
-            
             const favourites = await this.favouriteService.getFavouritesByUserId(payload.user_id);
             response.status(200).json(favourites);
         } catch (error) {
+            console.log("dhukse");
             response.status(500).json({ message: "An error occurred" });
         }
     }
@@ -22,7 +21,7 @@ export default class FavouriteController{
         try{
             const payload = await request.validateUsing(addToFavouriteValidate)
             await this.favouriteService.addToFavourite(payload);
-            response.status(200).json({ message: "Product added to favourites" });
+            response.status(200).json({ message: "blog added to favourites" });
         }
         catch(error) {
             response.status(500).json({ message: "An error occurred" });
@@ -33,7 +32,7 @@ export default class FavouriteController{
         try{
             const payload = await request.validateUsing(removeFromFavouriteValidate)
             await this.favouriteService.removeFromFavourite(payload);
-            response.status(200).json({ message: "Product added to favourites" });
+            response.status(200).json({ message: "blog removed from favourites" });
         }
         catch(error) {
             response.status(500).json({ message: "An error occurred" });
