@@ -4,10 +4,10 @@ import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
-import Favourite from './favourites.js'
+import Favourite from './Favourite.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
-import Blog from './blogs.js'
-import Like from './likes.js'
+import Blog from './Blog.js'
+import Like from './Like.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -31,20 +31,19 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
-
-  @hasMany(() => Favourite,{
+  @hasMany(() => Favourite, {
     foreignKey: 'user_id',
     localKey: 'id',
   })
   declare favourite: HasMany<typeof Favourite>
 
-  @hasMany(() => Blog,{
+  @hasMany(() => Blog, {
     foreignKey: 'user_id',
     localKey: 'id',
   })
   declare blog: HasMany<typeof Blog>
 
-  @hasMany(() => Like,{
+  @hasMany(() => Like, {
     foreignKey: 'user_id',
     localKey: 'id',
   })

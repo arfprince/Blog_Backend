@@ -1,7 +1,8 @@
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import User from './user.js'
+import User from './User.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Blog from './blogs.js'
+import Blog from './Blog.js'
+import { DateTime } from 'luxon'
 
 export default class Favourite extends BaseModel {
   @column({ isPrimary: true })
@@ -13,16 +14,21 @@ export default class Favourite extends BaseModel {
   @column()
   declare user_id: number
 
-  @belongsTo(() => User,{
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true })
+  declare updatedAt: DateTime
+
+  @belongsTo(() => User, {
     foreignKey: 'user_id',
     localKey: 'user_id',
   })
   declare user: BelongsTo<typeof User>
 
-  @belongsTo(() => Blog,{
+  @belongsTo(() => Blog, {
     foreignKey: 'blog_id',
     localKey: 'id',
   })
   declare blog: BelongsTo<typeof Blog>
-
 }

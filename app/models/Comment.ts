@@ -1,12 +1,13 @@
 import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
-import Post from './post.js'
+import Post from './Post.js'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import Reply from './reply.js'
-import Reaction from './reaction.js';
-import User from './user.js';
+import Reply from './Reply.js'
+import Reaction from './Reaction.js'
+import User from './User.js'
+import { DateTime } from 'luxon'
 
 export default class Comment extends BaseModel {
-  serializeExtras = true; 
+  serializeExtras = true
 
   @column({ isPrimary: true })
   declare comment_id: number
@@ -20,24 +21,30 @@ export default class Comment extends BaseModel {
   @column()
   declare content: string
 
-  @belongsTo(() => Post,{
-    foreignKey: 'post_id'
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true })
+  declare updatedAt: DateTime
+
+  @belongsTo(() => Post, {
+    foreignKey: 'post_id',
   })
   declare posts: BelongsTo<typeof Post>
 
-  @hasMany(() => Reply,{
-    foreignKey: 'comment_id'
+  @hasMany(() => Reply, {
+    foreignKey: 'comment_id',
   })
   declare replies: HasMany<typeof Reply>
 
-  @hasMany(() => Reaction,{
-    foreignKey:'comment_id'
+  @hasMany(() => Reaction, {
+    foreignKey: 'comment_id',
   })
   declare reactions: HasMany<typeof Reaction>
 
-  @belongsTo(() => User,{
+  @belongsTo(() => User, {
     foreignKey: 'user_id',
-    localKey:   'user_id'
+    localKey: 'user_id',
   })
   declare user: BelongsTo<typeof User>
 }

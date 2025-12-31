@@ -1,9 +1,9 @@
 import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
-import Like from './likes.js'
-import Favourite from './favourites.js'
-import User from './user.js'
+import Like from './Like.js'
+import Favourite from './Favourite.js'
+import User from './User.js'
 
 export default class Blog extends BaseModel {
   @column({ isPrimary: true })
@@ -20,12 +20,12 @@ export default class Blog extends BaseModel {
 
   @column()
   declare title: string
-  
+
   @column()
   declare content: string
 
   @column()
-  declare readTime: number 
+  declare readTime: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -39,23 +39,21 @@ export default class Blog extends BaseModel {
   @column()
   declare likeCount: number
 
-  @belongsTo(() => User,{
+  @belongsTo(() => User, {
     foreignKey: 'user_id',
     localKey: 'user_Id',
   })
   declare User: BelongsTo<typeof User>
 
-
-  @hasMany(() => Like,{
+  @hasMany(() => Like, {
     foreignKey: 'blog_id',
     localKey: 'id',
   })
   declare like: HasMany<typeof Like>
 
-  @hasMany(() => Favourite,{
+  @hasMany(() => Favourite, {
     foreignKey: 'blog_id',
     localKey: 'id',
   })
   declare favourite: HasMany<typeof Favourite>
-
 }
