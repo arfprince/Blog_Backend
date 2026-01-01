@@ -12,6 +12,7 @@ import "../app/Controllers/Http/Auth/auth.js"
 import "../app/Controllers/Http/Blog/blog.js"
 import "../app/Controllers/Http/Like/like.js"
 import "../app/Controllers/Http/Favourite/favourite.js"
+import "../app/Controllers/Http/Users/users_routes.js"
 router.get('/', async () => {
   return {
     hello: 'world',
